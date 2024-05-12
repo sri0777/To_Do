@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+      }
+
+      h3 {
+        font-size: 2em;
+        color: royalblue;
+      }
+
+      .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .hamburger-menu div {
+        width: 2rem;
+        height: 0.25rem;
+        background: #333;
+      }
+
+      nav ul {
+        list-style: none;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        right: 140px;
+        background-color: aliceblue;
+        width: 200px;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        display: block;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 10px 12px;
+        text-decoration: none;
+      }
+
+      .container {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+
+      table {
+        width: 60%;
+        margin: auto;
+        border-collapse: collapse;
+      }
+
+      h4 {
+        color: #333;
+        font-size: 24px;
+        padding: 10px 0;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #999;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #333;
+        color: white;
+      }
+
+      td a {
+        color: #f00;
+        text-decoration: none;
+      }
+
+      td a:hover {
+        text-decoration: underline;
+      }
+
+      /* New CSS styles */
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      /* ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+
+            nav ul li {
+              float: left;
+            } */
+
+      nav ul li a {
+        display: block;
+        color: rgb(17, 95, 111);
+        text-align: center;
+        padding: 10px 12px;
+        text-decoration: none;
+      }
+
+      /* Change the link color to #111 (black) on hover */
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: royalblue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <h3>Welcome <%=username%></h3>
+        <div class="hamburger-menu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <ul id="menu">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Signup</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <h4>Write Your Task Below</h4>
+    <form action="/addTask" method="post">
+      <input type="text" name="task" placeholder="Enter Your Task" required />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h4>Your Task List</h4>
+    <table>
+      <tr>
+        <th>Tasks</th>
+        <th colspan="2">Actions</th>
+      </tr>
+
+      <% data.forEach(el => { %>
+      <tr>
+       <%if(el.status === 1){ %>
+          <td><li style="text-decoration: line-through;"><%= el.task %></li></td>
+       <% } else{ %>
+          <td><li><%= el.task %></li></td>
+        <% } %>
+        <td><a href="/deleteTask/<%=username%>/<%=el.id%>/">&cross;</a></td>
+        <td><a href="/status/<%=username%>/<%=el.id%>">✅</a></td>
+      </tr>
+      <% }) %>
+    </table>
+
+    <script>
+      document
+        .querySelector(".hamburger-menu")
+        .addEventListener("click", function () {
+          document.getElementById("menu").style.display =
+            document.getElementById("menu").style.display === "none"
+              ? "flex"
+              : "none";
+        });
+    </script>
+  </body>
+</html>

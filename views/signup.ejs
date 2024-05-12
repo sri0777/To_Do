@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://wallpaperaccess.com/full/4893732.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: rgb(153, 189, 153);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"], form input[type="text"], form input[type="email"]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+form a {
+    display: block;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <form action="/signup" method="post">
+    Username <input type="text" name="username" placeholder="Enter Your Name" required>
+    Password <input type="text" name="password" placeholder="Enter Your Password" required>
+    Email <input type="email" name="email" placeholder="Enter Your Email" required>
+    <input type="submit" value="submit">
+    <a href="/login">User Login</a>
+    <%=mes%>
+    </form>
+</body>
+</html>
