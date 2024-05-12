@@ -6,9 +6,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     secret: "abc123",
+    cookie : {maxAge: 7*24*60*60*1000}
   })
 );
-// app.use(express.static('views'));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -25,7 +25,12 @@ client
     if (dbInstance) console.log("connected to database");
   });
 app.get(["/", "/login"], (req, res) => {
+  if(req.session.user){
+    res.redirect('/tasklist')
+  }
+  else{
   res.render("login", { mes: "" });
+  }
 });
 app.get("/signup", (req, res) => {
   res.render("signup", { mes: "" });
